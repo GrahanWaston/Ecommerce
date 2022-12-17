@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,10 @@ class ProductController extends Controller
     public function index()
     {
         //get all SDM from Model
-        $products = Product::latest()->get();
+        $SDM = HumanResource::latest()->get();
 
         //passing SDM to view
-        return view('Backend.Product.product', compact('products'));
+        return view('admin.dashboard.profil_SDM.profil_pejabat', compact('SDM'));
     }
 
     /**
@@ -28,7 +28,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('Backend.Product.product_add');
+        //
     }
 
     /**
@@ -39,27 +39,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $validateData = $request->validate([
-            'nama_barang' => 'required',
-            'harga' => 'required',
-        ]);
-
-        // if ($request->hasFile('file')) {
-        //     $validateData['file'] = $request->file('file')->store('files');
-        // }
-
-        Product::create($validateData);
-
-        return redirect('/product')->with('success', 'Product succesfully added');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Order $order)
     {
         //
     }
@@ -67,10 +56,10 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Order $order)
     {
         //
     }
@@ -79,10 +68,10 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Order $order)
     {
         //
     }
@@ -90,10 +79,10 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Order $order)
     {
         //
     }

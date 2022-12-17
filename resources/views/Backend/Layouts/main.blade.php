@@ -59,7 +59,7 @@
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
+                    <a class="nav-link" href="/product">
                         <i class="fa fa-list-alt"></i>
                         <span>Data Product</span></a>
                 </li>
