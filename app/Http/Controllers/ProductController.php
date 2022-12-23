@@ -70,9 +70,10 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $produk = Product::findOrfail($id);
+        return view('Backend.Product.product_update', compact('produk'));
     }
 
     /**
@@ -82,9 +83,17 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        $validateData = $request->validate([
+            'nama_barang' => 'required',
+            'harga' => 'required',
+        ]);
+
+
+        Product::where('id', $id)->update($validateData);
+
+        return redirect('/product')->with('success', 'Product berhasil di update');
     }
 
     /**
