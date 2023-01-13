@@ -66,9 +66,14 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+<<<<<<< HEAD
         $products = Product::find($id);
 
         return view('Backend.Product.product_update', compact('products'));
+=======
+        $produk = Product::findOrfail($id);
+        return view('Backend.Product.product_update', compact('produk'));
+>>>>>>> e839048d5f01c7570a2b36aba6b22fbc7244d925
     }
 
     /**
@@ -85,9 +90,16 @@ class ProductController extends Controller
             'harga' => 'required',
         ]);
 
+<<<<<<< HEAD
         Product::where('id', $id)->update($validateData);
 
         return redirect('/product')->with('success', 'Produk berhasil di update');
+=======
+
+        Product::where('id', $id)->update($validateData);
+
+        return redirect('/product')->with('success', 'Product berhasil di update');
+>>>>>>> e839048d5f01c7570a2b36aba6b22fbc7244d925
     }
 
     /**
