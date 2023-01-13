@@ -17,18 +17,14 @@
         <div class="container-xl">
             <div class="row">
                 <div class="col-md-8 mb-4 mb-md-0 tab-content">
-                    <form action="/product" id="form" method="POST">
+                    <form action="/customer" id="form" method="POST">
                         @csrf
                         <div class="card mb-3">
                             <!-- <div class="card-header font-weight-bold"></div> -->
                             <div class="card-body">
                                 <div class="mb-3">
-                                    <label for="" class="form-label">Product Name</label>
-                                    <input type="text" class="form-control" id="name" name="nama_barang">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">Price</label>
-                                    <input type="text" class="form-control" id="url" name="harga">
+                                    <label for="" class="form-label">Nama</label>
+                                    <input type="text" class="form-control" id="name" name="nama">
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-end bg-light">

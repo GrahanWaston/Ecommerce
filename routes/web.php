@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,11 +17,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('Frontend.index');
+    return view('Backend.Dashboard');
 });
 
 Route::resource('/product', ProductController::class);
+Route::resource('/customer', CustomerController::class);
+Route::resource('/order', OrderController::class);
 
-Route::get('/dashboard', function () {
-    return view('Backend.Dashboard');
-});

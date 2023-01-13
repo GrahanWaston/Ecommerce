@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -14,13 +16,16 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //get all SDM from Model
-        $SDM = HumanResource::latest()->get();
+        $orders = Order::latest()->get();
+        $customers = Customer::latest()->get();
 
-        //passing SDM to view
-        return view('admin.dashboard.profil_SDM.profil_pejabat', compact('SDM'));
+        return view('Backend.order.order_page', [
+            'orders' => $orders,
+            'customers' => $customers,
+            'products' => Product::latest()->get()
+        ]);
+
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -28,7 +33,13 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $orders = Order::latest()->get();
+        $customers = Customer::latest()->get();
+        return view('Backend.order.order_add', [
+            'orders' => $orders,
+            'customers' => $customers,
+            'products' => Product::latest()->get()
+        ]);
     }
 
     /**
@@ -39,7 +50,15 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'customer_id' => 'required',
+            'product_id' => 'required',
+            'qty' => 'required'
+        ]);
+
+        Order::create($validateData);
+
+        return redirect('/order')->with('success', 'Order succesfully added');
     }
 
     /**
@@ -59,9 +78,15 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order $order)
+    public function edit($id)
     {
-        //
+        $orders = Order::find($id);
+        $customers = Customer::latest()->get();
+        return view('Backend.order.order_update', [
+            'orders' => $orders,
+            'customers' => $customers,
+            'products' => Product::latest()->get()
+        ]);
     }
 
     /**
@@ -71,9 +96,15 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, $id)
     {
-        //
+        $validateData = $request->validate([
+            'qty' => 'required',
+        ]);
+
+        Order::where('id', $id)->update($validateData);
+
+        return redirect('/order')->with('success', 'Order berhasil di update');
     }
 
     /**
@@ -82,8 +113,11 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy($id)
     {
-        //
+        $order = Order::find($id);
+        $order->delete();
+
+        return redirect('/order')->with('success', 'Order berhasil dihapus!');
     }
 }
